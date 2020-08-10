@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>BetCalculator</groupId>
+  <artifactId>BetCalculator</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+   <dependencies>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.13.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <version>4.11</version>
+	      <scope>test</scope>
+	    </dependency>
+    
+	    <dependency>
+		    <groupId>com.konghq</groupId>
+		    <artifactId>unirest-java</artifactId>
+		    <version>3.7.02</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.seleniumhq.selenium</groupId>
+		  <artifactId>selenium-java</artifactId>
+		  <version>3.141.59</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.seleniumhq.selenium</groupId>
+		  <artifactId>selenium-firefox-driver</artifactId>
+		  <version>3.141.59</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.seleniumhq.selenium</groupId>
+		  <artifactId>selenium-chrome-driver</artifactId>
+		  <version>3.141.59</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-controls</artifactId>
+		    <version>14</version>
+		</dependency>
+  </dependencies>
+  
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <release>13</release>
+        </configuration>
+      </plugin>
+      
+       <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>0.0.4</version>
+        <configuration>
+            <mainClass>HelloFX</mainClass>
+        </configuration>
+    </plugin>
+    </plugins>
+  </build>
+</project>

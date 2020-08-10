@@ -1,0 +1,20 @@
+.root{
+	-fx-background-color: Gray;
+	-fx-text-align: center;
+}
+
+.label{
+	-fx-font-size: 25px;
+	
+	
+}
+
+#gridLabel{
+	-fx-alignment: center;
+	-fx-font-size: 15px;
+	-fx-border-style: solid;
+	-fx-min-width: 100;
+	-fx-min-height: 20;
+	-fx-max-width: 100;
+	-fx-max-height: 20;
+}
