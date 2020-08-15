@@ -1,12 +1,6 @@
 .root{
-	-fx-background-color: Gray;
+	-fx-background-color: white;
 	-fx-text-align: center;
-}
-
-.label{
-	-fx-font-size: 25px;
-	
-	
 }
 
 #gridLabel{
@@ -18,3 +12,4 @@
 	-fx-max-width: 100;
 	-fx-max-height: 20;
 }
+

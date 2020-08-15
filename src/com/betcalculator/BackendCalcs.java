@@ -15,8 +15,6 @@ public class BackendCalcs {
 	private ArrayList<Double> rightTeamBets;
 	private ArrayList<Double> rightTeamOdds;
 	
-	private double equalValueOdd = 0;
-	
 	public BackendCalcs() {
 		leftTeamBets = new ArrayList<Double>();
 		leftTeamOdds = new ArrayList<Double>();
@@ -43,41 +41,39 @@ public class BackendCalcs {
 			totalReturn += (teamBets.get(i) * teamOdds.get(i));
 		}
 		
-		return (new BigDecimal(totalReturn).setScale(2, RoundingMode.HALF_UP).doubleValue());
+		return (twoDecimalPlaces(totalReturn));
 	}
 	
 	public double totalLiquidIncome(ArrayList<Double> teamBets, ArrayList<Double> teamOdds) {
 		double totalLiquidIncome = (totalReturn(teamBets, teamOdds) - totalSpent(teamBets));
-		return (new BigDecimal(totalLiquidIncome).setScale(2, RoundingMode.HALF_UP).doubleValue());
+		return (twoDecimalPlaces(totalLiquidIncome));
 	}
 	
-	public double finalProfitOrWaste(ArrayList<Double> teamBets, ArrayList<Double> teamOdds, ArrayList<Double> enemyTeamBets) {
+	public double finalProfitWaste(ArrayList<Double> teamBets, ArrayList<Double> teamOdds, ArrayList<Double> enemyTeamBets) {
 		
 		Double teamIncome = totalLiquidIncome(teamBets, teamOdds);
 		Double enemyTeamWaste = totalSpent(enemyTeamBets);
 		Double result = teamIncome - enemyTeamWaste;
 		
-		return (new BigDecimal(result).setScale(2, RoundingMode.HALF_UP).doubleValue());
+		return (twoDecimalPlaces(result));
 	}
 
-	public void equalValue() {
-		double bothTeamFinalProfitWasteSum = Math.abs(finalProfitOrWaste(leftTeamBets, leftTeamOdds, rightTeamBets)) + Math.abs(finalProfitOrWaste(rightTeamBets, rightTeamOdds, leftTeamBets));
+	public double equalValue() {	
+		double result = 0;
+		double leftTeamFinalResult = twoDecimalPlaces(finalProfitWaste(leftTeamBets, leftTeamOdds, rightTeamBets));
+		double rightTeamFinalResult = twoDecimalPlaces(finalProfitWaste(rightTeamBets, rightTeamOdds, leftTeamBets));
 		
-		BigDecimal leftTeamFinalResult = new BigDecimal(finalProfitOrWaste(leftTeamBets, leftTeamOdds, rightTeamBets)).setScale(2, RoundingMode.HALF_UP);
-		BigDecimal rightTeamFinalResult = new BigDecimal(finalProfitOrWaste(rightTeamBets, rightTeamOdds, leftTeamBets)).setScale(2, RoundingMode.HALF_UP);
 		
-		if(leftTeamFinalResult.doubleValue() < 0) {
-			BigDecimal rightTeamLiquidProfit = new BigDecimal(finalProfitOrWaste(rightTeamBets, rightTeamOdds, leftTeamBets)).setScale(2, RoundingMode.HALF_UP);
-			double result = bothTeamFinalProfitWasteSum / rightTeamLiquidProfit.doubleValue();
-			equalValueOdd = result;
+		double bothTeamFinalProfitWasteSum = Math.abs(leftTeamFinalResult) + Math.abs(rightTeamFinalResult);
+	
+		if(leftTeamFinalResult < 0) {
+			result = bothTeamFinalProfitWasteSum / rightTeamFinalResult;
 		}
 		
-		else if(rightTeamFinalResult.doubleValue() < 0) {
-			BigDecimal leftTeamLiquidProfit = new BigDecimal(finalProfitOrWaste(leftTeamBets, leftTeamOdds, rightTeamBets)).setScale(2, RoundingMode.HALF_UP);
-			double result = bothTeamFinalProfitWasteSum / leftTeamLiquidProfit.doubleValue();
-			equalValueOdd = result;
-			
-		}
+		else if(rightTeamFinalResult < 0) {
+			result = bothTeamFinalProfitWasteSum / leftTeamFinalResult;	
+		}	
+		return result;
 	}
 	
 	public void revertTeam(ArrayList<Double> teamBets, ArrayList<Double> teamOdds) {
@@ -85,6 +81,12 @@ public class BackendCalcs {
 			teamBets.remove(teamBets.size()-1);
 			teamOdds.remove(teamOdds.size()-1);
 		}catch(Exception e) {}
+	}
+	
+	public double twoDecimalPlaces(double entry) {
+		BigDecimal bigDecimal = new BigDecimal(entry).setScale(2, RoundingMode.HALF_UP);
+		double roundedValue = bigDecimal.doubleValue();
+		return roundedValue;
 	}
 		
 }

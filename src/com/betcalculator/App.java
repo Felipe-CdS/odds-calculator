@@ -15,10 +15,11 @@ import javafx.application.Application;
 public class App implements Runnable {
 	
 	public static Thread thread;
-	//private static String matchURL = "https://sports.betway.com/pt/sports/evt/6199483";
+	private static String matchURL = "https://sports.betway.com/pt/sports/evt/6248403";
 	private static WebDriver driver; 
 	public static double oddTeamOne, oddTeamTwo;
 	public static BackendCalcs backendCalcs;
+	
 	
 	public static String nameTeamOne = "TeamOne", nameTeamTwo = "TeamTwo";
 	
@@ -38,7 +39,6 @@ public class App implements Runnable {
 	
 	public static void getActualOdds() {
 		System.out.println(nameTeamOne + " " +  oddTeamOne + " // " + nameTeamTwo + " " + oddTeamTwo);
-		System.out.println();
 	}
 	
 	public static void scrapBetway() {	
@@ -70,7 +70,6 @@ public class App implements Runnable {
 		thread = new Thread(this);
 		thread.start();	
 	}
-
 
 	public static void closeBrowser() {
 		try {
