@@ -7,10 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import lombok.Getter;
 
+@Getter
 public class FrontEndFX extends Application implements Runnable {
 	
-	GridTab gridTab;
+	public static GridTab gridTab;
 	LineChartTab lineChartTab;
 	VBox rootPane;
 	TabPane tabPane;

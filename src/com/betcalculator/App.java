@@ -15,7 +15,7 @@ import javafx.application.Application;
 public class App implements Runnable {
 	
 	public static Thread thread;
-	private static String matchURL = "https://sports.betway.com/pt/sports/evt/6248403";
+	private static String matchURL = "https://sports.betway.com/pt/sports/evt/6263246";
 	private static WebDriver driver; 
 	public static double oddTeamOne, oddTeamTwo;
 	public static BackendCalcs backendCalcs;
@@ -27,13 +27,15 @@ public class App implements Runnable {
 		/*ChromeOptions options = new ChromeOptions();
     	options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");    
 		driver = new ChromeDriver(options);
-		driver.get(matchURL);*/
+		driver.get(matchURL);
+		scrapBetway();*/
 		backendCalcs = new BackendCalcs();
 	}
 		
 	public static void main(String[] args) throws Exception {
 		App app = new App();
 		app.startThread();
+		thread.sleep(3000);
 		Application.launch(FrontEndFX.class, args);
 	}
 	

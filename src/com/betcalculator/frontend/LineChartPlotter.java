@@ -9,42 +9,40 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class LineChartPlotter {
-	final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-	final CategoryAxis xAxis;
-	final NumberAxis yAxis;
-	final LineChart<String, Number> lineChart;
-	XYChart.Series<String, Number> series;
+	//final CategoryAxis ;
+	final NumberAxis xAxis, yAxis;
+	final LineChart<Number, Number> lineChart;
+	Series<Number, Number> oddsSeries;
 	double plotOdd;
 	
 	
-	public LineChartPlotter() {
+	public LineChartPlotter(String xAxisName,String yAxisName,String seriesName, String chartName) {
 		plotOdd = 0;
-		xAxis = new CategoryAxis();
+		xAxis = new NumberAxis();
 		yAxis = new NumberAxis();
 		
-		xAxis.setLabel("Time/s");
+		xAxis.setLabel(xAxisName);
 		xAxis.setAnimated(false);
-		yAxis.setLabel("Value");
+		yAxis.setLabel(yAxisName);
+		yAxis.setForceZeroInRange(false);
 		yAxis.setAnimated(false);
 		
 		lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.setTitle("RealTimeOdds");
+		lineChart.setTitle(chartName);
 		lineChart.setAnimated(false);
 		
-		series = new XYChart.Series<>();
-		series.setName("odds");
-		lineChart.getData().add(series);
+		oddsSeries = new XYChart.Series<>();
+		oddsSeries.setName(seriesName);
+		
+		lineChart.getData().add(oddsSeries);
 	}
 	
-	public void plotChart() {		
-		if(plotOdd != App.oddTeamOne) {
-			Date now = new Date();
-			series.getData().add(new XYChart.Data<>(simpleDateFormat.format(now), App.oddTeamOne));
-			plotOdd = App.oddTeamOne;
-		}
-	}
+	
 }
