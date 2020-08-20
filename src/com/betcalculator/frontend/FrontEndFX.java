@@ -12,8 +12,10 @@ import lombok.Getter;
 @Getter
 public class FrontEndFX extends Application implements Runnable {
 	
+	
 	public static GridTab gridTab;
 	LineChartTab lineChartTab;
+	ConfigTab configTab;
 	VBox rootPane;
 	TabPane tabPane;
 
@@ -36,16 +38,18 @@ public class FrontEndFX extends Application implements Runnable {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		try {
 		rootPane = new VBox();
 		rootPane.getStylesheets().add("//stylesheets/styles.css");
 		
 		tabPane = new TabPane();
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 		
-		gridTab = new GridTab();
-		lineChartTab = new LineChartTab();
+		gridTab = new GridTab("Main");
+		lineChartTab = new LineChartTab("graphs");
+		configTab = new ConfigTab("config");
 		
-		tabPane.getTabs().addAll(gridTab.returnTab(), lineChartTab.returnTab());
+		tabPane.getTabs().addAll(gridTab.returnTab(), lineChartTab.returnTab(), configTab.returnTab());
 		
 		rootPane.getChildren().addAll(tabPane);
 		
@@ -56,6 +60,10 @@ public class FrontEndFX extends Application implements Runnable {
 		primaryStage.setHeight(500);
 		primaryStage.setScene(scene);
 		primaryStage.show();	
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	/*
@@ -75,8 +83,8 @@ public class FrontEndFX extends Application implements Runnable {
 		Runnable updater = new Runnable() {
 			@Override
 			public void run() {
-				gridTab.update();
-				lineChartTab.update();
+					gridTab.update();
+					lineChartTab.update();
 			}	
 		};
 		

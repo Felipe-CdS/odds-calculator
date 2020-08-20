@@ -14,9 +14,10 @@ import javafx.application.Application;
 
 public class App implements Runnable {
 	
+	
 	public static Thread thread;
-	private static String matchURL = "https://sports.betway.com/pt/sports/evt/6263246";
-	private static WebDriver driver; 
+	public static WebDriver driver; 
+	public static String matchURL = "https://sports.betway.com/pt/sports/evt/6263254";
 	public static double oddTeamOne, oddTeamTwo;
 	public static BackendCalcs backendCalcs;
 	
@@ -24,19 +25,15 @@ public class App implements Runnable {
 	public static String nameTeamOne = "TeamOne", nameTeamTwo = "TeamTwo";
 	
 	public App() {
-		/*ChromeOptions options = new ChromeOptions();
-    	options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");    
-		driver = new ChromeDriver(options);
-		driver.get(matchURL);
-		scrapBetway();*/
+		
 		backendCalcs = new BackendCalcs();
+		startDriver();
 	}
 		
 	public static void main(String[] args) throws Exception {
-		App app = new App();
-		app.startThread();
-		thread.sleep(3000);
-		Application.launch(FrontEndFX.class, args);
+			App app = new App();
+			app.startThread();
+			Application.launch(FrontEndFX.class, args);
 	}
 	
 	public static void getActualOdds() {
@@ -73,6 +70,14 @@ public class App implements Runnable {
 		thread.start();	
 	}
 
+	public static void startDriver() {
+		System.out.println("Starting browser...");
+		ChromeOptions options = new ChromeOptions();
+    	options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");    
+    	driver = new ChromeDriver(options);
+
+	}
+	
 	public static void closeBrowser() {
 		try {
 			driver.quit();
@@ -111,4 +116,6 @@ public class App implements Runnable {
 	            }    
 	        }
 	}
+	
+	
 }

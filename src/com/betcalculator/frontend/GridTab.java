@@ -13,9 +13,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class GridTab {
+public class GridTab extends AbstractTab {
 	
-	Tab gridTab;
 	VBox rootPane, leftBox, rightBox;
 	HBox rootPaneOrganizer;
 	
@@ -28,21 +27,23 @@ public class GridTab {
 	EqualValueLiveBox equalValueLiveBox;
 
 	//This tab is build with 3 parts. The top one whit the odds, the left and the right;
-	public GridTab() {
-		gridTab = new Tab("Main");
+	public GridTab(String name) {
+		super(name);
 		rootPane = new VBox();
 		rootPane.setAlignment(Pos.TOP_CENTER);
+		rootPane.setSpacing(20);
 		
 		liveOddsBox = new LiveOddsBox();
 		leftBoxContructor();
 		rightBoxConstructor();
 		
 		rootPaneOrganizer = new HBox();
+		rootPaneOrganizer.setAlignment(Pos.CENTER);
 		rootPaneOrganizer.getChildren().addAll(leftBox, rightBox);
 		
 		rootPane.getChildren().addAll(liveOddsBox.returnBox(), rootPaneOrganizer);
 
-		gridTab.setContent(rootPane);
+		rootTab.setContent(rootPane);
 		
 	}
 	
@@ -97,13 +98,10 @@ public class GridTab {
 	 * This special feature is only needed by the boxes that are about the live odds
 	 * because the odd changes every second.
 	 */
-	public Tab returnTab() {
-		return gridTab;
-	}
-	
 	public void update() {
 		liveOddsBox = new LiveOddsBox();
 		rootPane.getChildren().remove(0);
 		rootPane.getChildren().add(0, liveOddsBox.returnBox());
 	}
+	
 }

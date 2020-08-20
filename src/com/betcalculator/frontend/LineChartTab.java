@@ -10,26 +10,22 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 
-public class LineChartTab {
+public class LineChartTab extends AbstractTab {
+	
 	final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
-	Tab lineChartTab;
 	HBox hbox;
 	LineChartPlotter teamOnePlotter, teamTwoPlotter;
 	
-	public LineChartTab() {
-		lineChartTab = new Tab("graphs");	
+	public LineChartTab(String name) {
+		super(name);
 		teamOnePlotter = new LineChartPlotter("time", "odds", "odds", App.nameTeamOne);
 		teamTwoPlotter = new LineChartPlotter("time", "odds", "odds", App.nameTeamTwo);
 		hbox = new HBox();
 		hbox.setAlignment(Pos.TOP_CENTER);
 		hbox.getChildren().addAll(teamOnePlotter.getLineChart(), teamTwoPlotter.getLineChart());
-		lineChartTab.setContent(hbox);
+		rootTab.setContent(hbox);
 	}
 	
-	public Tab returnTab() {
-		return lineChartTab;
-	}
-
 	public void update() {
 		this.plotChart(teamOnePlotter, App.oddTeamOne);
 		this.plotChart(teamTwoPlotter, App.oddTeamTwo);
