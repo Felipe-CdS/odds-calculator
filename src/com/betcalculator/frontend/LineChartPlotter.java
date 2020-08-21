@@ -1,11 +1,5 @@
 package com.betcalculator.frontend;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import com.betcalculator.App;
-
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -40,6 +34,7 @@ public class LineChartPlotter {
 		
 		oddsSeries = new XYChart.Series<>();
 		oddsSeries.setName(seriesName);
+		lineChart.setLegendVisible(false);
 		
 		lineChart.getData().add(oddsSeries);
 	}

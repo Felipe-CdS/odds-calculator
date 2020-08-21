@@ -56,8 +56,7 @@ public class FrontEndFX extends Application implements Runnable {
 		Scene scene = new Scene(rootPane);
 		
 		primaryStage.setTitle("test Stage");
-		primaryStage.setWidth(1200);
-		primaryStage.setHeight(500);
+		primaryStage.setMaximized(true);
 		primaryStage.setScene(scene);
 		primaryStage.show();	
 		}

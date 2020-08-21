@@ -39,7 +39,7 @@ public class ConfigTab extends AbstractTab {
 			App.matchURL =  textField.getText();
 			textField.clear();
 			
-			if(App.matchURL != null) {
+			if(App.matchURL != null && App.driver != null) {
 				App.driver.get(App.matchURL);
 			}
 			

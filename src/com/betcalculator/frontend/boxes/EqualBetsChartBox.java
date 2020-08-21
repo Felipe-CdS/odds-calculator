@@ -32,5 +32,9 @@ public class EqualBetsChartBox extends Box {
 			lineChart.getOddsSeries().getData().add(new XYChart.Data<>(value, odds));
 		}
 	}
+	
+	public LineChartPlotter returnChart() {
+		return lineChart;
+	}
 
 }

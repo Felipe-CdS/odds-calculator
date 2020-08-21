@@ -74,6 +74,31 @@ public class BackendCalcs {
 			result = bothTeamFinalProfitWasteSum / leftTeamFinalResult;	
 		}	
 		return result;
+	}	
+	
+	
+	//Work in progress
+	public double equalValueLiveOdd(double liveOdd) {
+		// waste / liveOdd = return
+		//double result = 0;
+		double leftTeamFinalResult = twoDecimalPlaces(finalProfitWaste(leftTeamBets, leftTeamOdds, rightTeamBets));
+		double rightTeamFinalResult = twoDecimalPlaces(finalProfitWaste(rightTeamBets, rightTeamOdds, leftTeamBets));
+		
+		double x = 0;
+
+		if(leftTeamFinalResult < 0) {
+			while((x * liveOdd) < (totalSpent(rightTeamBets) + x)) {
+				x += 0.1;
+			}
+		}
+		
+		else if(rightTeamFinalResult < 0) {
+			while((x * liveOdd) < (totalSpent(leftTeamBets) + x)) {
+				x += 0.01;
+			}
+		}	
+		
+		return x;
 	}
 	
 	public void revertTeam(ArrayList<Double> teamBets, ArrayList<Double> teamOdds) {

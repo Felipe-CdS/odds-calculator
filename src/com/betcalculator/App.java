@@ -75,7 +75,6 @@ public class App implements Runnable {
 		ChromeOptions options = new ChromeOptions();
     	options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1200","--ignore-certificate-errors", "--silent");    
     	driver = new ChromeDriver(options);
-
 	}
 	
 	public static void closeBrowser() {

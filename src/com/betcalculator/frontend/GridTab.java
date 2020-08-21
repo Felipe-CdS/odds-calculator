@@ -9,9 +9,9 @@ import com.betcalculator.frontend.boxes.FinalResultBox;
 import com.betcalculator.frontend.boxes.LiveOddsBox;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 
 public class GridTab extends AbstractTab {
 	
@@ -31,7 +31,6 @@ public class GridTab extends AbstractTab {
 		super(name);
 		rootPane = new VBox();
 		rootPane.setAlignment(Pos.TOP_CENTER);
-		rootPane.setSpacing(20);
 		
 		liveOddsBox = new LiveOddsBox();
 		leftBoxContructor();
@@ -51,14 +50,16 @@ public class GridTab extends AbstractTab {
 	private void leftBoxContructor() {
 		leftBox = new VBox();
 		leftBox.setAlignment(Pos.TOP_CENTER);
+		leftBox.setSpacing(50);
 		HBox minorBoxesOrganizer = new HBox();
 		minorBoxesOrganizer.setAlignment(Pos.TOP_CENTER);
 		
 		entriesGridBox = new EntriesGridBox();
 		equalValueBox = new EqualValueBox();
 		finalResultBox = new FinalResultBox();
+		equalValueLiveBox = new EqualValueLiveBox();
 
-		minorBoxesOrganizer.getChildren().addAll(finalResultBox.returnBox(), equalValueBox.returnBox());
+		minorBoxesOrganizer.getChildren().addAll(finalResultBox.returnBox(), equalValueBox.returnBox(), equalValueLiveBox.returnBox());
 		leftBox.getChildren().addAll(entriesGridBox.returnBox(), minorBoxesOrganizer);
 	}
 	
@@ -70,10 +71,10 @@ public class GridTab extends AbstractTab {
 		minorBoxesOrganizer.setAlignment(Pos.TOP_CENTER);
 				
 		equalBetsChartBox = new EqualBetsChartBox();
-		chartKeyPointsBox = new ChartKeyPointsBox();
-		equalValueLiveBox = new EqualValueLiveBox();
+		chartKeyPointsBox = new ChartKeyPointsBox(equalBetsChartBox.returnChart());
 		
-		minorBoxesOrganizer.getChildren().addAll(chartKeyPointsBox.returnBox(), equalValueLiveBox.returnBox());
+		
+		minorBoxesOrganizer.getChildren().addAll(chartKeyPointsBox.returnBox());
 		rightBox.getChildren().addAll(equalBetsChartBox.returnBox(), minorBoxesOrganizer);
 	}
 	
@@ -100,6 +101,7 @@ public class GridTab extends AbstractTab {
 	 */
 	public void update() {
 		liveOddsBox = new LiveOddsBox();
+		//equalValueLiveBox = new EqualValueLiveBox();
 		rootPane.getChildren().remove(0);
 		rootPane.getChildren().add(0, liveOddsBox.returnBox());
 	}

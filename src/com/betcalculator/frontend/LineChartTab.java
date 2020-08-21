@@ -1,13 +1,12 @@
 package com.betcalculator.frontend;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+//import java.util.Date;
 
 import com.betcalculator.App;
 
 import javafx.geometry.Pos;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.HBox;
 
 public class LineChartTab extends AbstractTab {
@@ -33,7 +32,7 @@ public class LineChartTab extends AbstractTab {
 	
 	public void plotChart(LineChartPlotter lineChart, double teamOdds) {
 		if(lineChart.getPlotOdd() != teamOdds) {
-			Date now = new Date();
+			//Date now = new Date();
 			lineChart.getOddsSeries().getData().add(new XYChart.Data<>(1, teamOdds));
 			lineChart.setPlotOdd(teamOdds);
 		}
